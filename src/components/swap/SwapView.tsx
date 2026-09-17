@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { ArrowDownUp, Settings, ChevronDown, ShieldCheck } from 'lucide-react';
+import { ArrowDownUp, Settings, ChevronDown, ShieldCheck, AlertCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { Token } from '../../types';
 import { useWallet } from '../../context/WalletContext';
+import { useLanguage } from '../../context/LanguageContext';
 
 interface SwapViewProps {
   onOpenTokenSelect: (target: 'in' | 'out') => void;
@@ -18,6 +19,7 @@ export const SwapView: React.FC<SwapViewProps> = ({
   onFlipTokens,
 }) => {
   const { isConnected, connectWallet, usdcBalance, isArcMainnet, switchToArc } = useWallet();
+  const { language, t } = useLanguage();
 
   const [amountIn, setAmountIn] = useState<string>('100');
   const [slippage, setSlippage] = useState<number>(0.5);
@@ -67,21 +69,33 @@ export const SwapView: React.FC<SwapViewProps> = ({
         });
       } catch {}
 
-      alert(`Successfully swapped ${amountIn} ${tokenIn.symbol} for ${amountOut} ${tokenOut.symbol} on Arc Mainnet!`);
+      alert(
+        language === 'id'
+          ? `Berhasil menukar ${amountIn} ${tokenIn.symbol} ke ${amountOut} ${tokenOut.symbol} di Arc Mainnet!`
+          : `Successfully swapped ${amountIn} ${tokenIn.symbol} for ${amountOut} ${tokenOut.symbol} on Arc Mainnet!`
+      );
     } finally {
       setIsSwapping(false);
     }
   };
 
   return (
-    <div className="max-w-md mx-auto pt-6">
+    <div className="max-w-md mx-auto pt-6 pb-8 space-y-3">
+      {/* In-development Roadmap banner */}
+      <div className="flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-800 dark:text-amber-300 text-xs">
+        <AlertCircle className="w-4 h-4 shrink-0 text-amber-600 dark:text-amber-400" />
+        <span className="leading-tight">
+          {t.swapDevNotice}
+        </span>
+      </div>
+
       <div className="rounded-3xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-[#111624] shadow-xl p-5 space-y-3">
         {/* Card Header: Swap title & Settings */}
         <div className="flex items-center justify-between px-1 pb-1">
           <div className="flex items-center gap-2">
-            <h2 className="text-base font-bold text-slate-900 dark:text-white">Swap</h2>
+            <h2 className="text-base font-bold text-slate-900 dark:text-white">{t.swapTitle}</h2>
             <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-rose-50 dark:bg-rose-950/50 text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-900/50">
-              v4 Singleton
+              {t.swapVersionBadge}
             </span>
           </div>
 
@@ -95,7 +109,7 @@ export const SwapView: React.FC<SwapViewProps> = ({
 
             {showSettings && (
               <div className="absolute right-0 top-full mt-2 z-30 w-64 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#151B2B] shadow-xl p-4 text-xs space-y-3">
-                <div className="font-bold text-slate-900 dark:text-white">Max Slippage</div>
+                <div className="font-bold text-slate-900 dark:text-white">{t.swapSlippage}</div>
                 <div className="grid grid-cols-4 gap-1.5">
                   {[0.1, 0.5, 1.0].map((s) => (
                     <button
@@ -129,9 +143,9 @@ export const SwapView: React.FC<SwapViewProps> = ({
         {/* You Pay Section */}
         <div className="p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-slate-50/80 dark:bg-slate-900/40 space-y-2">
           <div className="flex items-center justify-between text-xs text-slate-500">
-            <span>You pay</span>
+            <span>{t.swapYouPay}</span>
             {tokenIn.isNative && (
-              <span className="font-mono">Balance: {usdcBalance} USDC</span>
+              <span className="font-mono">{t.swapBalance}: {usdcBalance} USDC</span>
             )}
           </div>
 
@@ -176,8 +190,8 @@ export const SwapView: React.FC<SwapViewProps> = ({
         {/* You Receive Section */}
         <div className="p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-slate-50/80 dark:bg-slate-900/40 space-y-2">
           <div className="flex items-center justify-between text-xs text-slate-500">
-            <span>You receive</span>
-            <span className="text-[11px] text-emerald-600 font-medium">Optimal Route</span>
+            <span>{t.swapYouReceive}</span>
+            <span className="text-[11px] text-emerald-600 font-medium">{t.swapRouteDesc}</span>
           </div>
 
           <div className="flex items-center justify-between gap-3">
@@ -206,21 +220,21 @@ export const SwapView: React.FC<SwapViewProps> = ({
         {/* Route Details Breakdown */}
         <div className="p-3.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/20 space-y-2 text-xs">
           <div className="flex items-center justify-between text-slate-500">
-            <span>Rate</span>
+            <span>{t.swapRate}</span>
             <span className="font-mono font-medium text-slate-800 dark:text-slate-200">
               1 {tokenIn.symbol} ≈ {rate.toFixed(4)} {tokenOut.symbol}
             </span>
           </div>
 
           <div className="flex items-center justify-between text-slate-500">
-            <span>Price Impact</span>
+            <span>{t.swapPriceImpact}</span>
             <span className="font-mono text-emerald-600 dark:text-emerald-400 font-medium">
               &lt; {priceImpact}%
             </span>
           </div>
 
           <div className="flex items-center justify-between text-slate-500">
-            <span>Min Received ({slippage}%)</span>
+            <span>{t.swapMinReceived} ({slippage}%)</span>
             <span className="font-mono text-slate-800 dark:text-slate-200">
               {minReceived.toFixed(4)} {tokenOut.symbol}
             </span>
@@ -229,7 +243,7 @@ export const SwapView: React.FC<SwapViewProps> = ({
           <div className="flex items-center justify-between text-slate-500 pt-1 border-t border-slate-200 dark:border-slate-800">
             <span className="flex items-center gap-1">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
-              <span>Network Gas (USDC)</span>
+              <span>{t.swapNetworkFee}</span>
             </span>
             <span className="font-mono font-bold text-slate-900 dark:text-white">
               ~0.003 <span className="text-rose-500">USDC</span>
@@ -243,7 +257,7 @@ export const SwapView: React.FC<SwapViewProps> = ({
           disabled={isSwapping || numIn <= 0}
           className="w-full py-3.5 rounded-2xl text-sm font-semibold text-white bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-600 hover:to-pink-700 shadow-md shadow-rose-500/20 transition-all hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50"
         >
-          {isSwapping ? 'Swapping on Arc...' : !isConnected ? 'Connect Wallet' : !isArcMainnet ? 'Switch to Arc 5042' : 'Swap Tokens'}
+          {isSwapping ? t.swapProcessing : !isConnected ? t.swapConnectWallet : !isArcMainnet ? t.swapSwitchNetwork : t.swapButton}
         </button>
       </div>
     </div>

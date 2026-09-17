@@ -63,26 +63,54 @@ Aplikasi ini menyuguhkan pengalaman DeFi tingkat lanjut: eksplorasi likuiditas r
 
 ---
 
+### 7. Modal Status Fitur & Roadmap Pengembangan
+*Dasbor transparansi ekosistem yang menampilkan fitur siap pakai di mainnet vs modul yang sedang dalam pengembangan aktif.*
+![Status Fitur Modal](./docs/images/feature_status.png)
+
+---
+
+## 🚧 Status Fitur: Siap Pakai vs. Dalam Pengembangan
+
+Untuk transparansi penuh bagi para trader dan penyedia likuiditas (LP) di jaringan Arc Mainnet, Arcade membagi status fitur ke dalam dua kategori:
+
+| Fitur / Modul | Status | Keterangan |
+| :--- | :---: | :--- |
+| **Swap Token Langsung v3 & v4** | 🟢 **Aktif di Mainnet** | Swap token dengan gas native USDC (6 desimal) pada pool single-hop terverifikasi dengan proteksi slippage. |
+| **Likuiditas Terkonsentrasi (v3)** | 🟢 **Aktif di Mainnet** | Rentang harga kustom, Full Range, preset batas tick, klaim bagi hasil fee, dan manajemen posisi NFT. |
+| **Penjelajah Pool Real-Time** | 🟢 **Aktif di Mainnet** | Eksplorasi real-time 197+ pool Arc dengan TVL, volume 24j, APR, dan pelacak fee Degen. |
+| **Dukungan Bilingual (EN & ID)** | 🟢 **Aktif di Mainnet** | Penggantian bahasa Bahasa Indonesia dan English langsung melalui tombol di navbar aplikasi web. |
+| **Pencarian Omni-Search & Hotkeys** | 🟢 **Aktif di Mainnet** | Pencarian instan `/` (Ctrl+K) dan tombol pintasan keyboard kilat (`S`, `P`, `M`, `C`, `R`, `?`, `Esc`). |
+| **Mode Terang (Light) & Gelap (Dark)**| 🟢 **Aktif di Mainnet** | Tampilan Light mode dan Dark mode premium dengan penyimpanan preferensi otomatis di LocalStorage (semua tangkapan layar menggunakan mode Light). |
+| **Dynamic Hooks Uniswap v4** | 🟡 **Dalam Pengembangan** | Pembuatan pool dengan flag hook telah aktif; sandbox eksekusi kontrak custom hook sedang dikembangkan. |
+| **Widget Fast Bridge Bawaan** | 🟡 **Dalam Pengembangan** | Saat ini mengarah ke bridge resmi Arc-Scan; widget fast-bridge bawaan di dalam dApp sedang dikembangkan. |
+| **Limit Orders & TWAP Otomatis** | 🟡 **Dalam Pengembangan** | Limit order dan pesanan TWAP terdesentralisasi on-chain pada pool Uniswap v3/v4. |
+| **Multi-Hop Smart Order Routing** | 🟡 **Dalam Pengembangan** | Rute single-hop langsung telah beroperasi; pembagian rute multi-hop otomatis lintas 3+ token sedang dioptimalkan. |
+| **Dashboard Historis Subgraph** | 🟡 **Dalam Pengembangan** | Grafik candlestick mendalam dan analitik likuiditas historis berbasis subgraph. |
+
+---
+
 ## ✨ Fitur-Fitur Unggulan
 
 1. **Dukungan Ganda Uniswap v3 & v4**:
    - Menampilkan dan mengelola pool Uniswap v3 serta pool arsitektur baru Uniswap v4 (Singleton PoolManager).
-2. **Kompabilitas Penuh Gas Native USDC Arc (6 Desimal)**:
+2. **Dukungan Bahasa Ganda (Bilingual EN / ID)**:
+   - Pengguna dapat beralih antara Bahasa Indonesia dan English dengan 1-klik di bagian atas navigation bar.
+3. **Kompabilitas Penuh Gas Native USDC Arc (6 Desimal)**:
    - Menghindari masalah overflow atau desimal salah akibat asumsi 18 desimal standar Ethereum.
-3. **Penyedia Likuiditas Terkonsentrasi (Concentrated Liquidity)**:
+4. **Penyedia Likuiditas Terkonsentrasi (Concentrated Liquidity)**:
    - Slider tick batas harga otomatis yang mengkalkulasikan rasio deposit token A dan token B.
    - Preset rentang cepat: **Full Range**, **±5%**, **±10%**, **±20%**.
    - Pilihan fee tier: `0.01%` (Stablecoin), `0.05%` (Pasangan umum), `0.30%` (Volatilitas sedang), `1.00%` (Eksotis).
-4. **Manajemen Siklus Posisi LP**:
+5. **Manajemen Siklus Posisi LP**:
    - **Tambah Likuiditas**: Suntik modal baru ke pool yang sudah ada.
    - **Tarik Sebagian Likuiditas**: Slider persentase penarikan (`25%`, `50%`, `75%`, `100%`).
    - **Klaim Fee Tanpa Exit**: Ambil hasil fee perdagangan tanpa harus menutup posisi likuiditas aktif.
-5. **Data Snapshot Terverifikasi On-Chain**:
+6. **Data Snapshot Terverifikasi On-Chain**:
    - Disertai file `public/arc_real_pools.json` berisi puluhan pool resmi yang telah diverifikasi di Arc Mainnet.
-6. **Omni-Search (`/`) & Pro Shortcuts**:
+7. **Omni-Search (`/`) & Pro Shortcuts**:
    - Navigasi super cepat dengan tombol keyboard standar trader pro.
-7. **Mode Gelap & Terang (Dark / Light Mode)**:
-   - Desain modern bernuansa web3 dengan penyimpanan preferensi otomatis di LocalStorage.
+8. **Mode Gelap & Terang (Dark / Light Mode)**:
+   - Desain modern bernuansa web3 dengan penyimpanan preferensi otomatis di LocalStorage (semua tangkapan layar diperbarui dalam Mode Terang / Light Mode).
 
 ---
 

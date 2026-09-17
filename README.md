@@ -63,9 +63,36 @@ Arcade delivers a frictionless DeFi experience featuring real-time pool discover
 
 ---
 
+### 7. Feature Status & Development Roadmap Modal
+*Transparent ecosystem dashboard showing production-ready features vs. modules under active development.*
+![Feature Status Modal](./docs/images/feature_status.png)
+
+---
+
+## 🚧 Feature Status: Live vs. Under Development
+
+To ensure complete clarity for traders and liquidity providers on Arc Mainnet, Arcade explicitly categorizes features into two statuses:
+
+| Feature / Module | Status | Description |
+| :--- | :---: | :--- |
+| **Direct v3 & v4 Token Swaps** | 🟢 **Mainnet Live** | Instant swaps with native USDC gas (6 decimals) across all verified pools with slippage protection. |
+| **Concentrated Liquidity (v3)** | 🟢 **Mainnet Live** | Custom price ranges, Full Range, tick presets, deposit ratios, and NFT position management. |
+| **Real-time Pools Discovery** | 🟢 **Mainnet Live** | Explore 197+ verified Arc Mainnet pools with TVL, 24h volume, APR, and Degen fee tracker. |
+| **Bilingual Web App (EN / ID)** | 🟢 **Mainnet Live** | Full English & Bahasa Indonesia localization toggleable directly from the navigation bar. |
+| **Omni-Search & Hotkeys** | 🟢 **Mainnet Live** | Instant `/` global search and power keyboard shortcuts (`S`, `P`, `M`, `C`, `R`, `?`, `Esc`). |
+| **Light & Dark Mode** | 🟢 **Mainnet Live** | Crisp Light mode and sleek Dark mode with automatic theme persistence. |
+| **Uniswap v4 Dynamic Hooks** | 🟡 **Under Development** | Pool creation with hook flags is operational; dynamic hook smart contract execution sandbox is in active development. |
+| **In-App Canonical Fast Bridge** | 🟡 **Under Development** | Currently links out to official Arc-Scan bridge; embedded in-dApp fast bridge widget is in development. |
+| **Automated Limit Orders & TWAP** | 🟡 **Under Development** | Smart contract-based limit orders and TWAP order execution on Uniswap v3/v4 pools. |
+| **Multi-Hop Smart Order Routing** | 🟡 **Under Development** | Direct single-hop routing is fully operational; multi-path split routing across 3+ intermediate tokens is being optimized. |
+| **Subgraph Historical Analytics** | 🟡 **Under Development** | Deep candlestick charts and historical liquidity analytics dashboard. |
+
+---
+
 ## ✨ Key Features
 
 - **Dual-Protocol Support**: Seamlessly browse and manage both **Uniswap v3** and **Uniswap v4** pools on Arc Mainnet.
+- **Bilingual Interface**: Toggle between English (`EN`) and Bahasa Indonesia (`ID`) directly from the top navigation bar.
 - **Native USDC Gas Awareness**: Fully adapted for Arc's native currency (6 decimals), eliminating standard 18-decimal overflow errors.
 - **Concentrated Liquidity (V3)**:
   - Custom Min/Max price tick boundaries with real-time token ratio calculations.
@@ -78,7 +105,7 @@ Arcade delivers a frictionless DeFi experience featuring real-time pool discover
 - **Live Arc Mainnet Snapshot**: Ships with pre-indexed verified pools (`public/arc_real_pools.json`) including ARGUS/USDC, WETH/USDC, WBTC/USDC, and community tokens.
 - **Omni-Search & Command Bar**: Press `/` anywhere to search pools by token name, ticker, or pool address.
 - **Pro Keyboard Shortcuts**: Full hotkey support for power traders (`S` for Swap, `P` for Pools, `N` for New Pool, `R` for Refresh, `?` for Help).
-- **Dark & Light Mode**: Premium aesthetic with automatic theme persistence.
+- **Dark & Light Mode**: Premium aesthetic with automatic theme persistence (all screenshots captured in Light Mode).
 
 ---
 

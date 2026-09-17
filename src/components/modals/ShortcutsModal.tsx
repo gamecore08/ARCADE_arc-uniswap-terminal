@@ -1,5 +1,6 @@
 import React from 'react';
 import { X, Keyboard } from 'lucide-react';
+import { useLanguage } from '../../context/LanguageContext';
 
 interface ShortcutsModalProps {
   isOpen: boolean;
@@ -7,17 +8,43 @@ interface ShortcutsModalProps {
 }
 
 export const ShortcutsModal: React.FC<ShortcutsModalProps> = ({ isOpen, onClose }) => {
+  const { language, t } = useLanguage();
+
   if (!isOpen) return null;
 
   const shortcuts = [
-    { key: 'Ctrl + K (Windows) / ⌘K', desc: 'Omnibar search (tokens, pools, hooks)' },
-    { key: 'S', desc: 'Navigate to Trade / Swap' },
-    { key: 'P', desc: 'Navigate to Explore Pools' },
-    { key: 'M', desc: 'Navigate to My Positions' },
-    { key: 'C', desc: 'Open + Create Pool modal' },
-    { key: 'R', desc: 'Trigger in-app data refresh (Zero F5 reload)' },
-    { key: 'Esc', desc: 'Close open modal or dialog' },
-    { key: '?', desc: 'Toggle this keyboard shortcut guide' },
+    {
+      key: 'Ctrl + K / ⌘K',
+      desc: language === 'id' ? 'Pencarian Omni-search (token, pool, hook)' : 'Omnibar search (tokens, pools, hooks)',
+    },
+    {
+      key: 'S',
+      desc: language === 'id' ? 'Navigasi ke Halaman Swap' : 'Navigate to Trade / Swap',
+    },
+    {
+      key: 'P',
+      desc: language === 'id' ? 'Navigasi ke Eksplorasi Pool' : 'Navigate to Explore Pools',
+    },
+    {
+      key: 'M',
+      desc: language === 'id' ? 'Navigasi ke Posisi Saya' : 'Navigate to My Positions',
+    },
+    {
+      key: 'C',
+      desc: language === 'id' ? 'Buka modal Buat Pool Baru' : 'Open + Create Pool modal',
+    },
+    {
+      key: 'R',
+      desc: language === 'id' ? 'Segarkan data tanpa reload halaman (Zero F5)' : 'Trigger in-app data refresh (Zero F5 reload)',
+    },
+    {
+      key: 'Esc',
+      desc: language === 'id' ? 'Tutup modal / pop-up aktif' : 'Close open modal or dialog',
+    },
+    {
+      key: '?',
+      desc: language === 'id' ? 'Buka / tutup panduan shortcut ini' : 'Toggle this keyboard shortcut guide',
+    },
   ];
 
   return (
@@ -27,7 +54,7 @@ export const ShortcutsModal: React.FC<ShortcutsModalProps> = ({ isOpen, onClose 
         <div className="flex items-center justify-between p-5 border-b border-slate-100 dark:border-slate-800">
           <div className="flex items-center gap-2 text-base font-bold text-slate-900 dark:text-white">
             <Keyboard className="w-5 h-5 text-rose-500" />
-            <span>Keyboard Shortcuts</span>
+            <span>{t.modalShortcutsTitle}</span>
           </div>
           <button
             onClick={onClose}
@@ -44,7 +71,7 @@ export const ShortcutsModal: React.FC<ShortcutsModalProps> = ({ isOpen, onClose 
               key={s.key}
               className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 dark:bg-slate-850/70 border border-slate-200/80 dark:border-slate-800 text-xs"
             >
-              <span className="text-slate-600 dark:text-slate-300">{s.desc}</span>
+              <span className="text-slate-600 dark:text-slate-300 font-medium">{s.desc}</span>
               <kbd className="px-2.5 py-1 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono font-bold text-rose-600 dark:text-rose-400 shadow-xs">
                 {s.key}
               </kbd>

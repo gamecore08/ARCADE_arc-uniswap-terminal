@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { X, Search, ArrowRight, Droplets, Zap, Sparkles } from 'lucide-react';
 import { Pool, Token } from '../../types';
 import { ARC_TOKENS } from '../../config/tokens';
+import { useLanguage } from '../../context/LanguageContext';
 
 interface OmniSearchModalProps {
   isOpen: boolean;
@@ -23,6 +24,7 @@ export const OmniSearchModal: React.FC<OmniSearchModalProps> = ({
   onCreatePool,
 }) => {
   const [query, setQuery] = useState('');
+  const { language, t } = useLanguage();
 
   if (!isOpen) return null;
 
@@ -51,7 +53,7 @@ export const OmniSearchModal: React.FC<OmniSearchModalProps> = ({
             autoFocus
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search tokens, pools, hooks, or quick actions..."
+            placeholder={t.modalOmniSearchPlaceholder}
             className="w-full text-sm text-slate-900 dark:text-white bg-transparent outline-none placeholder-slate-400"
           />
           <button
@@ -67,7 +69,7 @@ export const OmniSearchModal: React.FC<OmniSearchModalProps> = ({
           {/* Quick actions */}
           <div>
             <div className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider px-2 mb-1">
-              Quick Navigation
+              {language === 'id' ? 'Navigasi Cepat' : 'Quick Navigation'}
             </div>
             <div className="grid grid-cols-2 gap-1.5">
               <button
@@ -78,7 +80,7 @@ export const OmniSearchModal: React.FC<OmniSearchModalProps> = ({
                 className="flex items-center gap-2 p-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/60 text-xs font-medium text-slate-700 dark:text-slate-300 transition-colors"
               >
                 <Zap className="w-4 h-4 text-amber-500" />
-                <span>Go to Trade / Swap (S)</span>
+                <span>{language === 'id' ? 'Buka Tukar (Swap) [S]' : 'Go to Trade / Swap (S)'}</span>
               </button>
               <button
                 onClick={() => {
@@ -88,7 +90,7 @@ export const OmniSearchModal: React.FC<OmniSearchModalProps> = ({
                 className="flex items-center gap-2 p-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/60 text-xs font-medium text-slate-700 dark:text-slate-300 transition-colors"
               >
                 <Sparkles className="w-4 h-4 text-rose-500" />
-                <span>Create Pool (C)</span>
+                <span>{language === 'id' ? 'Buat Pool Baru [C]' : 'Create Pool (C)'}</span>
               </button>
             </div>
           </div>
@@ -97,7 +99,7 @@ export const OmniSearchModal: React.FC<OmniSearchModalProps> = ({
           {matchingPools.length > 0 && (
             <div>
               <div className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider px-2 mb-1">
-                Pools
+                {language === 'id' ? 'Pool Likuiditas' : 'Pools'}
               </div>
               <div className="space-y-1">
                 {matchingPools.map(pool => (
@@ -139,7 +141,7 @@ export const OmniSearchModal: React.FC<OmniSearchModalProps> = ({
               <div className="space-y-1">
                 {matchingTokens.map(token => (
                   <div
-                    key={token.symbol}
+                    key={token.address}
                     onClick={() => {
                       onSelectToken(token);
                       onClose();
@@ -147,15 +149,17 @@ export const OmniSearchModal: React.FC<OmniSearchModalProps> = ({
                     className="flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/60 cursor-pointer transition-colors"
                   >
                     <div className="flex items-center gap-2.5">
-                      <div className="w-5 h-5 rounded-full bg-rose-500/10 flex items-center justify-center text-[10px] font-bold text-rose-600">
+                      <div className="w-6 h-6 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-[10px] font-bold">
                         {token.symbol.slice(0, 2)}
                       </div>
-                      <span className="font-bold text-xs text-slate-900 dark:text-white">
-                        {token.symbol}
-                      </span>
-                      <span className="text-[11px] text-slate-400">
-                        {token.name}
-                      </span>
+                      <div>
+                        <div className="font-bold text-xs text-slate-900 dark:text-white">
+                          {token.symbol}
+                        </div>
+                        <div className="text-[10px] text-slate-400">
+                          {token.name}
+                        </div>
+                      </div>
                     </div>
                     <ArrowRight className="w-3.5 h-3.5 text-slate-400" />
                   </div>

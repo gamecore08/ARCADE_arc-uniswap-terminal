@@ -3,6 +3,7 @@ import { ExternalLink, ArrowUpRight, Plus, Droplets, ChevronLeft, ChevronRight, 
 import { Pool, PoolSortField, SortDirection } from '../../types';
 import { formatCurrency, formatPercent, shortenAddress, formatFeeDisplay } from '../../utils/formatters';
 import { buildDegenMetricsMap, PoolDegenMetrics } from '../../utils/degen';
+import { useLanguage } from '../../context/LanguageContext';
 
 interface PoolTableProps {
   pools: Pool[];
@@ -25,6 +26,7 @@ export const PoolTable: React.FC<PoolTableProps> = ({
   onAddLiquidity,
   onTrade,
 }) => {
+  const { language, t } = useLanguage();
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
   const totalPages = Math.ceil(pools.length / pageSize) || 1;
@@ -74,8 +76,14 @@ export const PoolTable: React.FC<PoolTableProps> = ({
     return (
       <div className="py-16 text-center border border-slate-200/80 dark:border-slate-800 rounded-3xl bg-white dark:bg-[#111624] shadow-xs">
         <Droplets className="w-10 h-10 text-slate-400 mx-auto mb-3 stroke-[1.5]" />
-        <p className="text-slate-700 dark:text-slate-200 font-semibold text-base">Tidak ada pool yang sesuai filter</p>
-        <p className="text-slate-400 dark:text-slate-500 text-xs mt-1">Coba sesuaikan atau reset filter Fee minimal, TVL minimal, APR minimal, atau mode Degen.</p>
+        <p className="text-slate-700 dark:text-slate-200 font-semibold text-base">
+          {language === 'id' ? 'Tidak ada pool yang sesuai filter' : 'No pools matching your filters'}
+        </p>
+        <p className="text-slate-400 dark:text-slate-500 text-xs mt-1">
+          {language === 'id'
+            ? 'Coba sesuaikan atau reset filter Fee minimal, TVL minimal, APR minimal, atau mode Degen.'
+            : 'Try adjusting or resetting your Fee, TVL, APR or Degen filters.'}
+        </p>
       </div>
     );
   }
@@ -86,15 +94,15 @@ export const PoolTable: React.FC<PoolTableProps> = ({
         <table className="w-full text-left text-sm border-collapse font-sans">
           <thead>
             <tr className="border-b border-slate-100 dark:border-slate-800/80 text-xs font-semibold text-slate-400 dark:text-slate-400 bg-slate-50/40 dark:bg-slate-900/40">
-              {renderSortHeader('Pair', 'pair', 'py-3.5 px-5 font-medium')}
-              <th className="py-3.5 px-3 font-medium">Version</th>
-              {renderSortHeader('Fee', 'fee', 'py-3.5 px-3 font-medium')}
-              {renderSortHeader('Umur / Status Degen', 'newest', 'py-3.5 px-4 font-medium')}
-              {renderSortHeader('Total liquidity', 'liquidity', 'py-3.5 px-5 font-medium')}
-              {renderSortHeader('Volume (24h)', 'volume', 'py-3.5 px-5 font-medium')}
-              {renderSortHeader('Est. fee APR', 'apr', 'py-3.5 px-5 font-medium')}
+              {renderSortHeader(t.poolsTablePool, 'pair', 'py-3.5 px-5 font-medium')}
+              <th className="py-3.5 px-3 font-medium">{t.poolsTableProtocol}</th>
+              {renderSortHeader(t.poolsTableFee, 'fee', 'py-3.5 px-3 font-medium')}
+              {renderSortHeader(language === 'id' ? 'Umur / Status Degen' : 'Age / Degen Status', 'newest', 'py-3.5 px-4 font-medium')}
+              {renderSortHeader(t.poolsTableTVL, 'liquidity', 'py-3.5 px-5 font-medium')}
+              {renderSortHeader(t.poolsTableVol, 'volume', 'py-3.5 px-5 font-medium')}
+              {renderSortHeader(t.poolsTableAPR, 'apr', 'py-3.5 px-5 font-medium')}
               <th className="py-3.5 px-5 font-medium">Hook</th>
-              <th className="py-3.5 px-5 font-medium text-right">Actions</th>
+              <th className="py-3.5 px-5 font-medium text-right">{t.poolsTableActions}</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60">
@@ -339,15 +347,15 @@ export const PoolTable: React.FC<PoolTableProps> = ({
                         onClick={() => onTrade(pool)}
                         className="px-3 py-1.5 text-xs font-semibold rounded-xl text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 transition-colors"
                       >
-                        Trade
+                        {t.poolsTrade}
                       </button>
                       <button
                         onClick={() => onAddLiquidity(pool)}
                         className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-semibold rounded-xl text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 border border-rose-200 dark:border-rose-900/40 transition-colors"
-                        title="Add liquidity"
+                        title={t.poolsAddLiquidity}
                       >
                         <Plus className="w-3 h-3 stroke-[2.5]" />
-                        Add
+                        {language === 'id' ? '+ Tambah' : '+ Add'}
                       </button>
                     </div>
                   </td>

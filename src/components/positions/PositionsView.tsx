@@ -3,6 +3,7 @@ import { RotateCw, MoreHorizontal, ChevronDown, Plus, Minus, DollarSign, Clock, 
 import { Position, PoolVersion } from '../../types';
 import { formatCurrency, formatPercent, shortenAddress } from '../../utils/formatters';
 import { useWallet } from '../../context/WalletContext';
+import { useLanguage } from '../../context/LanguageContext';
 
 // Helper to determine live DexScreener candlestick chart URL for a position
 const getPositionChartUrl = (pos: Position): string => {
@@ -42,6 +43,7 @@ export const PositionsView: React.FC<PositionsViewProps> = ({
   onChangeSubTab,
 }) => {
   const { address, isConnected, connectWallet, publicClient } = useWallet();
+  const { language, t } = useLanguage();
   const [versionFilter, setVersionFilter] = useState<PoolVersion>('all');
   const [statusFilter, setStatusFilter] = useState<'all' | 'in-range' | 'out-of-range' | 'closed'>('all');
   const [viewMode, setViewMode] = useState<'card' | 'table'>('card');
@@ -146,7 +148,7 @@ export const PositionsView: React.FC<PositionsViewProps> = ({
                 : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'
             }`}
           >
-            Explore pools
+            {t.poolsTabExplore}
           </button>
           <button
             onClick={() => onChangeSubTab('positions')}
@@ -156,7 +158,7 @@ export const PositionsView: React.FC<PositionsViewProps> = ({
                 : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'
             }`}
           >
-            My positions
+            {t.poolsTabPositions}
             <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-rose-500 rounded-full" />
           </button>
         </div>

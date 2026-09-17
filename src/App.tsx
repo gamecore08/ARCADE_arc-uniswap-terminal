@@ -10,6 +10,7 @@ import { ClaimFeeModal } from './components/positions/ClaimFeeModal';
 import { TokenSelectModal } from './components/modals/TokenSelectModal';
 import { OmniSearchModal } from './components/modals/OmniSearchModal';
 import { ShortcutsModal } from './components/modals/ShortcutsModal';
+import { FeatureStatusModal } from './components/modals/FeatureStatusModal';
 import { useArcData } from './hooks/useArcData';
 import { useShortcuts } from './hooks/useShortcuts';
 import { PoolIndexerService } from './services/poolIndexer';
@@ -53,6 +54,7 @@ export function App() {
   const [tokenSelectTarget, setTokenSelectTarget] = useState<'in' | 'out'>('in');
   const [isOmniSearchOpen, setIsOmniSearchOpen] = useState(false);
   const [isShortcutsHelpOpen, setIsShortcutsHelpOpen] = useState(false);
+  const [isFeatureStatusOpen, setIsFeatureStatusOpen] = useState(false);
 
   // Swap tokens
   const [tokenIn, setTokenIn] = useState<Token>(NATIVE_USDC);
@@ -80,6 +82,7 @@ export function App() {
       setIsTokenSelectOpen(false);
       setIsOmniSearchOpen(false);
       setIsShortcutsHelpOpen(false);
+      setIsFeatureStatusOpen(false);
     },
     onToggleHelp: () => setIsShortcutsHelpOpen(prev => !prev),
   });
@@ -125,6 +128,7 @@ export function App() {
         isDark={isDark}
         onToggleTheme={() => setIsDark(!isDark)}
         onOpenShortcuts={() => setIsShortcutsHelpOpen(true)}
+        onOpenFeatureStatus={() => setIsFeatureStatusOpen(true)}
       />
 
       {/* Main Content Area */}
@@ -158,6 +162,7 @@ export function App() {
               handleAddLiquidityPool(argusPool);
             }}
             onOpenShortcuts={() => setIsShortcutsHelpOpen(true)}
+            onOpenFeatureStatus={() => setIsFeatureStatusOpen(true)}
             activeSubTab={poolsSubTab}
             onChangeSubTab={setPoolsSubTab}
           />
@@ -261,6 +266,11 @@ export function App() {
       <ShortcutsModal
         isOpen={isShortcutsHelpOpen}
         onClose={() => setIsShortcutsHelpOpen(false)}
+      />
+
+      <FeatureStatusModal
+        isOpen={isFeatureStatusOpen}
+        onClose={() => setIsFeatureStatusOpen(false)}
       />
     </div>
   );

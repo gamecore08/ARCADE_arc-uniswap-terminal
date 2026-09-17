@@ -1,9 +1,10 @@
 import React, { useState, useMemo } from 'react';
-import { Plus, RotateCw, Search, ChevronDown, Check, ArrowUpRight, Sparkles, Keyboard, SlidersHorizontal, ArrowUp, ArrowDown, X, RotateCcw, ShieldCheck, Filter, LineChart, ExternalLink, Zap, Flame, AlertTriangle, Clock, Timer } from 'lucide-react';
+import { Plus, RotateCw, Search, ChevronDown, Check, ArrowUpRight, Sparkles, Keyboard, SlidersHorizontal, ArrowUp, ArrowDown, X, RotateCcw, ShieldCheck, Filter, LineChart, ExternalLink, Zap, Flame, AlertTriangle, Clock, Timer, Wrench } from 'lucide-react';
 import { Pool, PoolVersion, HookFilter, PoolSortField, SortDirection, SnapshotMeta } from '../../types';
 import { PoolTable } from './PoolTable';
 import { formatCurrency } from '../../utils/formatters';
 import { buildDegenMetricsMap, DegenFilterType, PoolDegenMetrics } from '../../utils/degen';
+import { useLanguage } from '../../context/LanguageContext';
 
 interface PoolsViewProps {
   pools: Pool[];
@@ -16,6 +17,7 @@ interface PoolsViewProps {
   onCreatePool: () => void;
   onViewDepth: () => void;
   onOpenShortcuts?: () => void;
+  onOpenFeatureStatus?: () => void;
   activeSubTab: 'explore' | 'positions';
   onChangeSubTab: (tab: 'explore' | 'positions') => void;
 }
@@ -76,9 +78,12 @@ export const PoolsView: React.FC<PoolsViewProps> = ({
   onCreatePool,
   onViewDepth,
   onOpenShortcuts,
+  onOpenFeatureStatus,
   activeSubTab,
   onChangeSubTab,
 }) => {
+  const { language, t } = useLanguage();
+
   // Filters state
   const [versionFilter, setVersionFilter] = useState<PoolVersion>('all');
   const [minFee, setMinFee] = useState<number>(0);
@@ -283,20 +288,33 @@ export const PoolsView: React.FC<PoolsViewProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-            Pools
+            {t.poolsTitle}
           </h1>
           <p className="text-sm text-slate-500 dark:text-slate-400 mt-1 font-normal">
-            Explore liquidity pools on Arc and find opportunities.
+            {t.poolsSubtitle}
           </p>
         </div>
 
-        <button
-          onClick={onCreatePool}
-          className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-2xl text-sm font-semibold text-white bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-600 hover:to-pink-700 shadow-md shadow-rose-500/20 transition-all hover:scale-[1.02] active:scale-[0.98]"
-        >
-          <Plus className="w-4 h-4 stroke-[2.5]" />
-          <span>+ Create pool</span>
-        </button>
+        <div className="flex items-center gap-2.5">
+          {onOpenFeatureStatus && (
+            <button
+              onClick={onOpenFeatureStatus}
+              className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-2xl text-xs font-semibold text-amber-800 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/40 border border-amber-300/80 dark:border-amber-700/60 hover:bg-amber-100 dark:hover:bg-amber-900/40 transition-colors shadow-xs cursor-pointer"
+              title={language === 'id' ? 'Lihat status fitur & roadmap' : 'View feature status & roadmap'}
+            >
+              <Wrench className="w-3.5 h-3.5" />
+              <span>{t.poolsFeatureStatusBtn}</span>
+            </button>
+          )}
+
+          <button
+            onClick={onCreatePool}
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-2xl text-sm font-semibold text-white bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-600 hover:to-pink-700 shadow-md shadow-rose-500/20 transition-all hover:scale-[1.02] active:scale-[0.98]"
+          >
+            <Plus className="w-4 h-4 stroke-[2.5]" />
+            <span>{t.poolsCreatePoolBtn}</span>
+          </button>
+        </div>
       </div>
 
       {/* Main Tab Bar: Explore pools / My positions + DexScreener Arc Link */}
@@ -310,7 +328,7 @@ export const PoolsView: React.FC<PoolsViewProps> = ({
                 : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'
             }`}
           >
-            Explore pools
+            {t.poolsTabExplore}
             {activeSubTab === 'explore' && (
               <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-rose-500 rounded-full" />
             )}
@@ -323,7 +341,7 @@ export const PoolsView: React.FC<PoolsViewProps> = ({
                 : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'
             }`}
           >
-            My positions
+            {t.poolsTabPositions}
             {activeSubTab === 'positions' && (
               <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-rose-500 rounded-full" />
             )}
