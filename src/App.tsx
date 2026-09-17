@@ -11,12 +11,13 @@ import { TokenSelectModal } from './components/modals/TokenSelectModal';
 import { OmniSearchModal } from './components/modals/OmniSearchModal';
 import { ShortcutsModal } from './components/modals/ShortcutsModal';
 import { FeatureStatusModal } from './components/modals/FeatureStatusModal';
+import { SupportModal } from './components/modals/SupportModal';
 import { useArcData } from './hooks/useArcData';
 import { useShortcuts } from './hooks/useShortcuts';
 import { PoolIndexerService } from './services/poolIndexer';
 import { Pool, Position, Token } from './types';
 import { ARC_TOKENS, NATIVE_USDC } from './config/tokens';
-import { Keyboard } from 'lucide-react';
+import { Keyboard, Coffee } from 'lucide-react';
 
 export function App() {
   const [activeTab, setActiveTab] = useState<'swap' | 'pools'>('pools');
@@ -55,6 +56,7 @@ export function App() {
   const [isOmniSearchOpen, setIsOmniSearchOpen] = useState(false);
   const [isShortcutsHelpOpen, setIsShortcutsHelpOpen] = useState(false);
   const [isFeatureStatusOpen, setIsFeatureStatusOpen] = useState(false);
+  const [isSupportOpen, setIsSupportOpen] = useState(false);
 
   // Swap tokens
   const [tokenIn, setTokenIn] = useState<Token>(NATIVE_USDC);
@@ -83,6 +85,7 @@ export function App() {
       setIsOmniSearchOpen(false);
       setIsShortcutsHelpOpen(false);
       setIsFeatureStatusOpen(false);
+      setIsSupportOpen(false);
     },
     onToggleHelp: () => setIsShortcutsHelpOpen(prev => !prev),
   });
@@ -199,13 +202,24 @@ export function App() {
             <span>Gas: USDC (6 desimal)</span>
           </div>
 
-          <button
-            onClick={() => setIsShortcutsHelpOpen(true)}
-            className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:bg-slate-50 text-slate-600 dark:text-slate-300 transition-colors"
-          >
-            <Keyboard className="w-3.5 h-3.5 text-rose-500" />
-            <span>Shortcuts (?)</span>
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setIsSupportOpen(true)}
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-rose-200 dark:border-rose-900/60 bg-rose-50/70 dark:bg-rose-950/40 hover:bg-rose-100 dark:hover:bg-rose-900/50 text-rose-700 dark:text-rose-300 font-medium transition-colors cursor-pointer"
+              title="Support this project"
+            >
+              <Coffee className="w-3.5 h-3.5 text-rose-500" />
+              <span>☕ Support</span>
+            </button>
+
+            <button
+              onClick={() => setIsShortcutsHelpOpen(true)}
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:bg-slate-50 text-slate-600 dark:text-slate-300 transition-colors"
+            >
+              <Keyboard className="w-3.5 h-3.5 text-rose-500" />
+              <span>Shortcuts (?)</span>
+            </button>
+          </div>
         </div>
       </footer>
 
@@ -271,6 +285,11 @@ export function App() {
       <FeatureStatusModal
         isOpen={isFeatureStatusOpen}
         onClose={() => setIsFeatureStatusOpen(false)}
+      />
+
+      <SupportModal
+        isOpen={isSupportOpen}
+        onClose={() => setIsSupportOpen(false)}
       />
     </div>
   );

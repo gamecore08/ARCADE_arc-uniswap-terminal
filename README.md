@@ -236,6 +236,22 @@ arcade-uniswap-arc/
 
 ---
 
+## ☕ Support & Donations
+
+If this tool helped you save time, manage concentrated liquidity, or snipe better pool entries, feel free to support future development and maintenance!
+
+| Network / Chain | Accepted Currencies | Wallet Address (Click to Copy) |
+| :--- | :--- | :--- |
+| **Bitcoin (BTC)** | Native BTC | `bc1qulgaaddxhl9qz5jcs4wu5tx5j3g9ng3lfd4cl0` |
+| **EVM Chains** | **Arc Mainnet (USDC gas)**, ETH, Base, Arbitrum, BSC, Polygon | `0xFCDD187D32cFaecD8B07638BD6004fA2bF6838C6` |
+| **Solana (SOL)** | SOL, SPL Tokens (USDC, USDT, etc.) | `2zyBHgVYNp5WnKUK25WsdsQbsMzkj8Kzw2wDePWAnGZY` |
+| **Sui Network** | SUI, Sui Ecosystem Tokens | `0xfac84087048bf82f4f99c7704ee0cf9b1386c064b8ea845ab6baf65d1153eb09` |
+
+> [!TIP]
+> **EVM Multi-Chain**: The EVM address above supports **Arc Mainnet (Chain ID 5042)**, Ethereum, Arbitrum, Optimism, Base, Polygon, and BNB Chain.
+
+---
+
 ## 📄 License
 
 This project is open source and available under the [MIT License](LICENSE).

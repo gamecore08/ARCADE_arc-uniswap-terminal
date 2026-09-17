@@ -229,6 +229,22 @@ arcade-uniswap-arc/
 
 ---
 
+## ☕ Dukung Proyek Ini (Support & Donasi)
+
+Jika antarmuka ini membantu Anda menghemat waktu, mengelola likuiditas terkonsentrasi, atau memantau pool di Arc Mainnet dengan lebih baik, Anda dapat mendukung pengembangan dan pemeliharaan fitur selanjutnya:
+
+| Jaringan / Chain | Aset yang Didukung | Alamat Wallet (Klik untuk Salin) |
+| :--- | :--- | :--- |
+| **Bitcoin (BTC)** | Native BTC | `bc1qulgaaddxhl9qz5jcs4wu5tx5j3g9ng3lfd4cl0` |
+| **Jaringan EVM** | **Arc Mainnet (Gas USDC)**, ETH, Base, Arbitrum, BSC, Polygon | `0xFCDD187D32cFaecD8B07638BD6004fA2bF6838C6` |
+| **Solana (SOL)** | SOL, Token SPL (USDC, USDT, dll.) | `2zyBHgVYNp5WnKUK25WsdsQbsMzkj8Kzw2wDePWAnGZY` |
+| **Sui Network** | SUI, Token Ekosistem Sui | `0xfac84087048bf82f4f99c7704ee0cf9b1386c064b8ea845ab6baf65d1153eb09` |
+
+> [!TIP]
+> **Multi-Chain EVM**: Alamat EVM di atas mendukung penerimaan di **Arc Mainnet (Chain 5042)**, Ethereum, Arbitrum, Optimism, Base, Polygon, dan BNB Chain.
+
+---
+
 ## 📄 Lisensi
 
 Proyek ini bersifat open-source di bawah lisensi [MIT License](LICENSE).
